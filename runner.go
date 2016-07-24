@@ -20,4 +20,14 @@ func main() {
 		}
 	})
 	fmt.Println(br)
+
+	br2 := testing.Benchmark(func(b *testing.B) {
+		b.SetParallelism(2)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				functionToBeTested()
+			}
+		})
+	})
+	fmt.Println(br2)
 }
